@@ -1,0 +1,726 @@
+/* 🎮 OctoFit Tracker - 8-BIT RETRO GAMING STYLE 🎮 */
+
+/* Import 8-bit pixel font */
+* {
+  font-family: 'Press Start 2P', cursive;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* 🍄 Super Mario Color Palette 🍄 */
+:root {
+  --mario-red: #E52521;
+  --mario-blue: #0066CC;
+  --mario-yellow: #FBD000;
+  --mario-green: #00B560;
+  --mario-orange: #FF8C00;
+  --mario-brown: #8B4513;
+  --mario-sky: #5C94FC;
+  --mario-coin: #FFD700;
+  --mario-star: #FFF700;
+  --mario-ground: #D2691E;
+  --mario-brick: #CC6633;
+  --pixel-black: #000000;
+  --pixel-white: #FFFFFF;
+  --pixel-red: #FF0000;
+  --pixel-blue: #0000FF;
+  --pixel-green: #00FF00;
+  --pixel-yellow: #FFFF00;
+  --pixel-cyan: #00FFFF;
+  --pixel-magenta: #FF00FF;
+  --pixel-orange: #FF8800;
+  --pixel-lime: #88FF00;
+  --pixel-pink: #FF0088;
+  --pixel-gray: #808080;
+  --pixel-dark-gray: #404040;
+  --pixel-light-gray: #C0C0C0;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, var(--mario-sky) 0%, #87CEEB 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Scanline Effect */
+.App::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    transparent 1px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 3px
+  );
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Pixel Grid Background */
+.App::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(var(--pixel-cyan) 1px, transparent 1px),
+    linear-gradient(90deg, var(--pixel-cyan) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+  animation: pixelScroll 20s linear infinite;
+}
+
+@keyframes pixelScroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 20px; }
+}
+
+/* Navigation Bar - Mario Game Menu Style */
+.navbar {
+  background: var(--mario-red) !important;
+  border: 4px solid var(--mario-yellow);
+  border-left: none;
+  border-right: none;
+  box-shadow: 
+    0 4px 0 var(--mario-orange),
+    0 8px 0 var(--pixel-black),
+    inset 0 4px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  z-index: 100;
+  padding: 1rem !important;
+}
+
+.navbar-brand {
+  font-size: 1.2rem !important;
+  color: var(--pixel-white) !important;
+  text-shadow: 
+    3px 3px 0 var(--mario-red),
+    4px 4px 0 var(--pixel-black);
+  display: flex;
+  align-items: center;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 99% { opacity: 0.7; }
+}
+
+.navbar-brand img {
+  width: 40px;
+  height: 40px;
+  image-rendering: pixelated;
+  filter: contrast(1.2) saturate(1.5);
+  margin-right: 12px;
+}
+
+.nav-link {
+  color: var(--pixel-white) !important;
+  font-size: 0.75rem !important;
+  padding: 0.5rem 1rem !important;
+  margin: 0 0.25rem;
+  border: 3px solid transparent;
+  background: var(--mario-orange);
+  box-shadow: 
+    2px 2px 0 var(--pixel-black);
+  transition: none !important;
+}
+
+.nav-link:hover {
+  background: var(--mario-yellow) !important;
+  color: var(--pixel-black) !important;
+  border: 3px solid var(--pixel-blue);
+  transform: translate(-2px, -2px);
+  box-shadow: 
+    4px 4px 0 var(--pixel-black);
+}
+
+.nav-link.active {
+  background: var(--mario-red) !important;
+  color: var(--pixel-white) !important;
+  border: 3px solid var(--mario-orange);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem 0;
+  position: relative;
+  z-index: 10;
+  background: 
+    repeating-linear-gradient(
+      45deg,
+      #0a0a0a,
+      #0a0a0a 10px,
+      #0c0c0c 10px,
+      #0c0c0c 20px
+    );
+}
+
+/* Text Styles */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--mario-red);
+  text-shadow: 
+    4px 4px 0 var(--pixel-white),
+    8px 8px 0 var(--pixel-black);
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+h4, h5, h6 { font-size: 1rem; }
+
+.lead {
+  color: var(--mario-blue);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  text-shadow: 2px 2px 0 var(--pixel-black);
+}
+
+/* Cards - Mario Game Window Style */
+.card {
+  background: var(--pixel-white);
+  border: 4px solid var(--mario-brown);
+  box-shadow: 
+    4px 4px 0 var(--pixel-gray),
+    8px 8px 0 var(--pixel-black);
+  transition: none;
+  margin-bottom: 1.5rem;
+}
+
+.card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 
+    8px 8px 0 var(--pixel-gray),
+    12px 12px 0 var(--pixel-black);
+}
+
+.card-header {
+  background: var(--mario-red) !important;
+  color: var(--pixel-white);
+  border: none;
+  border-bottom: 4px solid var(--mario-orange);
+  font-size: 0.9rem;
+  padding: 1rem;
+  text-shadow: 2px 2px 0 var(--pixel-black);
+}
+
+.card-body {
+  padding: 1.5rem;
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: var(--pixel-black);
+}
+
+.card-footer {
+  background: var(--pixel-light-gray);
+  border-top: 4px solid var(--mario-brown);
+  padding: 1rem;
+}
+
+.card.border-primary { 
+  border-color: var(--mario-blue) !important;
+  box-shadow: 
+    0 0 0 4px var(--mario-sky),
+    4px 4px 0 4px var(--pixel-black);
+}
+
+.card.border-success { 
+  border-color: var(--mario-green) !important;
+  box-shadow: 
+    0 0 0 4px var(--pixel-lime),
+    4px 4px 0 4px var(--pixel-black);
+}
+
+.card.border-info { 
+  border-color: var(--pixel-cyan) !important;
+  box-shadow: 
+    0 0 0 4px var(--pixel-blue),
+    4px 4px 0 4px var(--pixel-black);
+}
+
+.card.border-warning { 
+  border-color: var(--mario-yellow) !important;
+  box-shadow: 
+    0 0 0 4px var(--mario-coin),
+    4px 4px 0 4px var(--pixel-black);
+}
+
+.card.border-danger { 
+  border-color: var(--mario-red) !important;
+  box-shadow: 
+    0 0 0 4px var(--mario-orange),
+    4px 4px 0 4px var(--pixel-black);
+}
+
+/* Tables - Mario Data Screen */
+.table-responsive {
+  border: 4px solid var(--mario-brown);
+  background: var(--pixel-white);
+  box-shadow: 
+    inset 4px 4px 0 rgba(139, 69, 19, 0.2);
+}
+
+.table {
+  color: var(--pixel-black);
+  font-size: 0.7rem;
+  margin-bottom: 0;
+}
+
+.table td, .table th {
+  border: 2px solid var(--pixel-dark-gray);
+  padding: 0.75rem;
+  vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+  background: rgba(255, 215, 0, 0.3) !important;
+  color: var(--mario-red);
+  cursor: pointer;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background: rgba(251, 208, 0, 0.1);
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+thead.table-dark {
+  background: var(--mario-red) !important;
+  color: var(--pixel-white);
+  text-transform: uppercase;
+  border: 4px solid var(--mario-orange);
+  font-size: 0.8rem;
+}
+
+thead.table-dark th {
+  border: 2px solid var(--mario-yellow);
+  padding: 1rem;
+  text-shadow: 2px 2px 0 var(--pixel-black);
+}
+
+/* Badges - 8-bit Power-ups */
+.badge {
+  padding: 0.5em 1em;
+  font-size: 0.7rem;
+  border: 3px solid var(--pixel-black);
+  box-shadow: 2px 2px 0 var(--pixel-black);
+  text-shadow: 1px 1px 0 var(--pixel-black);
+  letter-spacing: 1px;
+}
+
+.badge.bg-primary {
+  background: var(--mario-blue) !important;
+  border-color: var(--mario-sky);
+}
+
+.badge.bg-success {
+  background: var(--mario-green) !important;
+  border-color: var(--pixel-lime);
+}
+
+.badge.bg-info {
+  background: var(--pixel-cyan) !important;
+  border-color: var(--pixel-blue);
+  color: var(--pixel-black) !important;
+}
+
+.badge.bg-warning {
+  background: var(--mario-yellow) !important;
+  border-color: var(--mario-coin);
+  color: var(--pixel-black) !important;
+}
+
+.badge.bg-danger {
+  background: var(--mario-red) !important;
+  border-color: var(--mario-orange);
+}
+
+.badge.bg-secondary {
+  background: var(--pixel-gray) !important;
+  border-color: var(--pixel-light-gray);
+}
+
+/* Buttons - Game Controller Style */
+.btn {
+  font-size: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border: 4px solid var(--pixel-black);
+  box-shadow: 
+    0 4px 0 var(--pixel-black);
+  transition: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.btn:hover {
+  transform: translateY(2px);
+  box-shadow: 
+    0 2px 0 var(--pixel-black);
+}
+
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+.btn-primary {
+  background: var(--mario-blue);
+  color: var(--pixel-white);
+  border-color: var(--mario-sky);
+}
+
+.btn-success {
+  background: var(--mario-green);
+  color: var(--pixel-white);
+  border-color: var(--pixel-lime);
+}
+
+.btn-info {
+  background: var(--pixel-cyan);
+  color: var(--pixel-black);
+  border-color: var(--pixel-blue);
+}
+
+.btn-warning {
+  background: var(--mario-yellow);
+  color: var(--pixel-black);
+  border-color: var(--mario-coin);
+}
+
+.btn-danger {
+  background: var(--mario-red);
+  color: var(--pixel-white);
+  border-color: var(--mario-orange);
+}
+
+.btn-secondary {
+  background: var(--pixel-gray);
+  color: var(--pixel-white);
+  border-color: var(--pixel-light-gray);
+}
+
+.btn-outline-primary {
+  background: transparent;
+  color: var(--pixel-blue);
+  border: 4px solid var(--pixel-blue);
+}
+
+.btn-outline-primary:hover {
+  background: var(--pixel-blue);
+  color: var(--pixel-white);
+}
+
+.btn-outline-danger {
+  background: transparent;
+  color: var(--pixel-red);
+  border: 4px solid var(--pixel-red);
+}
+
+.btn-outline-danger:hover {
+  background: var(--pixel-red);
+  color: var(--pixel-white);
+}
+
+.btn-outline-info {
+  background: transparent;
+  color: var(--pixel-cyan);
+  border: 4px solid var(--pixel-cyan);
+}
+
+.btn-outline-info:hover {
+  background: var(--pixel-cyan);
+  color: var(--pixel-black);
+}
+
+.btn-outline-success {
+  background: transparent;
+  color: var(--pixel-green);
+  border: 4px solid var(--pixel-green);
+}
+
+.btn-outline-success:hover {
+  background: var(--pixel-green);
+  color: var(--pixel-black);
+}
+
+/* Links - Retro Hyperlink */
+a {
+  color: var(--pixel-cyan);
+  text-decoration: none;
+  text-shadow: 1px 1px 0 var(--pixel-black);
+}
+
+a:hover {
+  color: var(--pixel-yellow);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+/* Spinners - 8-bit Loading */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid var(--pixel-cyan);
+  border-right-color: transparent;
+  animation: pixelSpin 1s steps(8) infinite;
+}
+
+@keyframes pixelSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Footer - Mario Game Over Screen Style */
+.footer {
+  margin-top: auto;
+  background: var(--mario-red);
+  border-top: 4px solid var(--mario-yellow);
+  box-shadow: 
+    inset 0 4px 0 rgba(255, 255, 255, 0.3),
+    0 -4px 0 var(--mario-orange);
+  padding: 1.5rem 0;
+  position: relative;
+  z-index: 100;
+}
+
+.footer p {
+  color: var(--pixel-white);
+  font-size: 0.75rem;
+  text-shadow: 2px 2px 0 var(--pixel-black);
+  margin: 0;
+}
+
+/* Container Adjustments */
+.container {
+  max-width: 1200px;
+}
+
+/* Custom Icons - Pixelated */
+.bi {
+  filter: drop-shadow(2px 2px 0 var(--pixel-black));
+}
+
+/* Alerts - Game Messages */
+.alert {
+  border: 4px solid var(--pixel-black);
+  box-shadow: 4px 4px 0 var(--pixel-black);
+  font-size: 0.75rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.alert-info {
+  background: var(--mario-sky);
+  color: var(--pixel-white);
+  border-color: var(--mario-blue);
+}
+
+.alert-danger {
+  background: var(--pixel-red);
+  color: var(--pixel-white);
+  border-color: var(--pixel-pink);
+}
+
+.alert-success {
+  background: var(--mario-green);
+  color: var(--pixel-white);
+  border-color: var(--pixel-lime);
+}
+
+.alert-warning {
+  background: var(--pixel-yellow);
+  color: var(--pixel-black);
+  border-color: var(--pixel-orange);
+}
+
+/* Form Controls - Command Input Style */
+.form-control, .form-select {
+  background: var(--pixel-white);
+  color: var(--pixel-black);
+  border: 4px solid var(--mario-red);
+  font-size: 0.75rem;
+  padding: 0.75rem;
+  box-shadow: inset 2px 2px 0 var(--pixel-dark-gray);
+}
+
+.form-control:focus, .form-select:focus {
+  background: var(--pixel-white);
+  color: var(--pixel-black);
+  border-color: var(--mario-blue);
+  box-shadow: 
+    inset 2px 2px 0 var(--pixel-dark-gray),
+    0 0 0 4px var(--pixel-blue);
+}
+
+.form-label {
+  color: var(--mario-red);
+  font-size: 0.75rem;
+  text-shadow: 2px 2px 0 var(--pixel-black);
+  margin-bottom: 0.5rem;
+}
+
+/* Modal - Pause Screen */
+.modal-content {
+  background: var(--pixel-white);
+  border: 4px solid var(--mario-red);
+  box-shadow: 
+    8px 8px 0 var(--pixel-black),
+    0 0 40px var(--pixel-cyan);
+}
+
+.modal-header {
+  background: var(--mario-red);
+  color: var(--pixel-white);
+  border-bottom: 4px solid var(--mario-orange);
+  font-size: 0.9rem;
+}
+
+.modal-body {
+  background: var(--pixel-white);
+  color: var(--pixel-black);
+  font-size: 0.75rem;
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  background: var(--pixel-light-gray);
+  border-top: 4px solid var(--mario-brown);
+}
+
+.btn-close, .btn-close-white {
+  filter: invert(1) contrast(2);
+  opacity: 1;
+}
+
+/* Text Color Classes */
+.text-primary { color: var(--mario-blue) !important; }
+.text-success { color: var(--mario-green) !important; }
+.text-info { color: var(--mario-sky) !important; }
+.text-warning { color: var(--mario-yellow) !important; }
+.text-danger { color: var(--mario-red) !important; }
+.text-muted { 
+  color: var(--pixel-gray) !important;
+  text-shadow: 1px 1px 0 var(--pixel-black);
+}
+
+.text-white { color: var(--pixel-white) !important; }
+
+/* Special Effects */
+.fw-bold, .fw-semibold {
+  text-shadow: 
+    2px 2px 0 var(--pixel-black),
+    1px 1px 0 currentColor;
+}
+
+code {
+  background: var(--pixel-black);
+  color: var(--pixel-green);
+  padding: 0.2rem 0.4rem;
+  border: 2px solid var(--pixel-gray);
+  font-family: 'Press Start 2P', cursive;
+}
+
+/* Responsive - Keep it 8-bit! */
+@media (max-width: 768px) {
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.2rem; }
+  .navbar-brand { font-size: 0.9rem !important; }
+  .nav-link { font-size: 0.6rem !important; }
+  .card-body { padding: 1rem; }
+  .table { font-size: 0.6rem; }
+  .btn { font-size: 0.65rem; padding: 0.6rem 1rem; }
+  .badge { font-size: 0.6rem; }
+}
+
+/* Game Start Animation */
+@keyframes gameStart {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.container > div {
+  animation: gameStart 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Scrollbar - Mario Style */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--mario-sky);
+  border: 2px solid var(--mario-blue);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mario-red);
+  border: 2px solid var(--mario-orange);
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mario-yellow);
+  border-color: var(--mario-coin);
+}
+
+/* Level Up Effect for important elements */
+.card-title {
+  animation: levelUp 0.5s ease;
+}
+
+@keyframes levelUp {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-4px); }
+  75% { transform: translateY(-2px); }
+}
+
+/* Bootstrap overrides for 8-bit style */
+.shadow-sm {
+  box-shadow: 4px 4px 0 var(--pixel-black) !important;
+}
+
+.rounded-pill {
+  border-radius: 4px !important;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+}
