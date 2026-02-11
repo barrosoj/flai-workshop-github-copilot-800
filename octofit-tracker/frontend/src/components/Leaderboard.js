@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
+// API URL Configuration
+// Codespace URL: https://{CODESPACE_NAME}-8000.app.github.dev/api/leaderboard
+// Local URL: http://localhost:8000/api/leaderboard
 const API_URL = process.env.REACT_APP_CODESPACE_NAME
   ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api`
   : 'http://localhost:8000/api';
